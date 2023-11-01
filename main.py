@@ -47,21 +47,21 @@ app.include_router(
 
 
 @app.get('/')
-async def root():
+async def root() -> dict:
     return {'message': 'Hello World'}
 
 
 @app.post('/test-login')
-async def test_login(response: Response):
+async def test_login(response: Response) -> None:
     response.set_cookie(
-        key='faketoken', value=settings.authjwt_secret_key, httponly=True
+        key='faketoken', value=settings.Token.authjwt_secret_key, httponly=True
     )
     logging.log(51, 'Токен успешно выдан')
     return None
 
 
 @app.get('/hello/{name}')
-async def say_hello(name: str):
+async def say_hello(name: str) -> dict:
     return {'message': f'Hello {name}'}
 
 

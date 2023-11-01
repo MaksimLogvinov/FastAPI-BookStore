@@ -1,6 +1,3 @@
-from typing import List
-
-from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -12,7 +9,7 @@ from storages import exceptions
 session = AsyncSession(bind=engine, expire_on_commit=False)
 
 
-async def get_books(db: AsyncSession) -> List[Book]:
+async def get_books(db: AsyncSession) -> list[Book]:
     books = await db.execute(select(Book))
     return books.scalars().all()
 

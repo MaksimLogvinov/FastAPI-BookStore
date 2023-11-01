@@ -1,5 +1,3 @@
-from typing import List
-
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -11,7 +9,7 @@ from storages import exceptions
 session = AsyncSession(bind=engine, expire_on_commit=False)
 
 
-async def get_authors(db: AsyncSession) -> List[Author]:
+async def get_authors(db: AsyncSession) -> list[Author]:
     authors = await db.execute(select(Author))
     return authors.scalars().all()
 

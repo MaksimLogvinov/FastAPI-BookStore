@@ -1,7 +1,5 @@
-import os
+from pydantic import BaseModel, Field
 
-from dotenv import load_dotenv
 
-load_dotenv()
-
-authjwt_secret_key = os.getenv('authjwt_secret_key', default='fake-access-token')
+class Token(BaseModel):
+    authjwt_secret_key: str = Field(default='fake-access-token')

@@ -1,5 +1,3 @@
-from typing import List
-
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -12,8 +10,8 @@ from storages.authors import get_authors, add_author, update_author, \
 router = APIRouter()
 
 
-@router.get('/', response_model=List[ShowAuthors])
-async def show_books(db: AsyncSession = Depends(get_db)) -> List[ShowAuthors]:
+@router.get('/', response_model=list[ShowAuthors])
+async def show_books(db: AsyncSession = Depends(get_db)) -> list[Author]:
     results = await get_authors(db)
     return results
 

@@ -1,5 +1,3 @@
-from typing import List
-
 from fastapi import APIRouter, Depends, Query
 from fastapi_filter import FilterDepends
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -13,12 +11,12 @@ from storages.books import get_books, add_book, update_book, delete_book
 router = APIRouter()
 
 
-@router.get('/', response_model=List[ShowBooks])
-async def show_books(db: AsyncSession = Depends(get_db)) -> List[Book]:
+@router.get('/', response_model=list[ShowBooks])
+async def show_books(db: AsyncSession = Depends(get_db)) -> list[Book]:
     return await get_books(db)
 
 
-@router.get('/search', response_model=List[ShowBooks])
+@router.get('/search', response_model=list[ShowBooks])
 async def filter_books(
         book_filter: BooksFilter = FilterDepends(BooksFilter),
         page: int = Query(ge=0, default=0),

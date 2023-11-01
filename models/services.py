@@ -10,7 +10,7 @@ class BookService:
         self.session = session
 
     async def get_books_filter(self, book_filter: BooksFilter,
-                               page: int, size: int):
+                               page: int, size: int) -> list[Book]:
         offset_min = page * size
         offset_max = (page + 1) * size
         query_filter = await book_filter.filter(select(Book))
